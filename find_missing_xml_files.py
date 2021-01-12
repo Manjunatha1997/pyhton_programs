@@ -21,12 +21,13 @@ def find_missing(path):
 		if not i in xml:
 			count += 1
 			print("Missing items are: "+i+".jpg",count)
+			# print("Deleting files are: "+i+".jpg",count)
 			# os.remove(path+i+'.jpg')
 
 	print("Total xml are:",len(xml))
 	print("Total jpg are:",len(jpg))
 	
 
-path = "/home/manju/Desktop/MR192/"
+path = "/home/manju/Desktop/sagar/"
 
 find_missing(path)

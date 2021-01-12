@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 count = 0
-img = cv2.imread('black_image.jpg')
-img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+img = cv2.imread('/home/manju/Pictures/image.jpg')
+# img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 if len(img.shape) == 3:
     for i in img:
