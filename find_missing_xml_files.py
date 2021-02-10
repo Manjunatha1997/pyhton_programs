@@ -1,5 +1,6 @@
 
 import os
+import shutil
 
 def find_missing(path):
 	res = os.listdir(path)
@@ -8,7 +9,7 @@ def find_missing(path):
 	for i in res:
 
 		if i.endswith('.jpg'):
-			k = i.split('.')
+			k = i.split('.')	
 			jpg.append(k[0])
 		
 		else:
@@ -23,11 +24,13 @@ def find_missing(path):
 			print("Missing items are: "+i+".jpg",count)
 			# print("Deleting files are: "+i+".jpg",count)
 			# os.remove(path+i+'.jpg')
+			# shutil.move(path+i+'.jpg','/home/manju/Downloads/pavithra/extra/'+i+'.jpg')
+
 
 	print("Total xml are:",len(xml))
 	print("Total jpg are:",len(jpg))
 	
 
-path = "/home/manju/Desktop/sagar/"
+path = "/home/manju/Downloads/pavithra/L2MR244/"
 
 find_missing(path)
