@@ -31,6 +31,6 @@ def find_missing(path):
 	print("Total jpg are:",len(jpg))
 	
 
-path = "/home/manju/Downloads/pavithra/L2MR244/"
+path = "/home/manju/Downloads/suma/"
 
 find_missing(path)

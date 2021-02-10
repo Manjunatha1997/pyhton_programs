@@ -13,5 +13,6 @@ for file in files:
 		l = [elt.tag for elt in root.iter()]
 		if 'name' not in l:
 			print(path+file)
+			print(path+file.split('.')[0]+'.jpg')
 				
 		

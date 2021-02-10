@@ -14,7 +14,8 @@ def find_classnames(path,num_of_classes):
 		for elt in tree.iter():
 
 			if((elt.tag == 'name')):
-				c.append(elt.text)
+				# c.append(elt.text)
+				pass
 
 
 
