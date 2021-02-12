@@ -5,7 +5,7 @@ import cv2
 
 inp_path = "/home/manju/Desktop/test/"
 
-xml_file = "/home/manju/Desktop/suprajit_13/MR_20.xml"
+xml_file = "/home/manju/Desktop/test/MR_0.xml"
 
 ####################################################################
 
@@ -17,8 +17,12 @@ res  = os.listdir(inp_path)
 
 for file in res:
 	f = file.split('.')[0]+'.xml'	
-	shutil.copyfile(xml_file,inp_path+f)
-	
+	try:
+		shutil.copyfile(xml_file,inp_path+f)
+	except:
+		pass
+
+
 
 path = inp_path
 files = os.listdir(path)
