@@ -1,19 +1,20 @@
 import os
+
 import xml.etree.ElementTree as ET
 
 path = '/home/manju/Desktop/ddd/Manju/'
 
-
-def empty_names(path):
+def all_class_names(path):
+	class_names = []
 	files = os.listdir(path)
 	for file in files:
 		if file.endswith('.xml'):
 			tree = ET.parse(path+file)
 			root = tree.getroot()
-			l = [elt.tag for elt in root.iter()]
-			if 'name' not in l:
-				print(path+file)
-				print(path+file.split('.')[0]+'.jpg')
-					
+			for elt in root.iter():
+				if elt.tag == 'name':
+					class_names.append(elt.text)
 
-empty_names(path)
+	print(set(class_names))
+
+all_class_names(path)		

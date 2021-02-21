@@ -2,6 +2,10 @@
 import os
 import shutil
 
+
+path = "/home/manju/Desktop/ddd/Manju/"
+
+
 def find_missing(path):
 	res = os.listdir(path)
 	jpg,xml = [],[]
@@ -30,7 +34,4 @@ def find_missing(path):
 	print("Total xml are:",len(xml))
 	print("Total jpg are:",len(jpg))
 	
-
-path = "/home/manju/Desktop/stepmarkdata/manju_StepMark/train/"
-
 find_missing(path)

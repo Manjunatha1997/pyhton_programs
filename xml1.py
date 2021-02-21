@@ -2,7 +2,9 @@ import os
 
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Desktop/Pavitra_1/'
+path = '/home/manju/Desktop/ddd/Manju/'
+
+
 
 files = os.listdir(path)
 
