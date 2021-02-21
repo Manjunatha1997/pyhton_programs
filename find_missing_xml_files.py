@@ -8,12 +8,12 @@ def find_missing(path):
 
 	for i in res:
 
-		if i.endswith('.jpg'):
+		if i.endswith('.xml'):
 			k = i.split('.')	
 			jpg.append(k[0])
 		
 		else:
-			if i.endswith('.xml'):
+			if i.endswith('.jpg'):
 				k = i.split('.')
 				xml.append(k[0])
 
@@ -21,16 +21,15 @@ def find_missing(path):
 	for i in jpg:
 		if not i in xml:
 			count += 1
-			print("Missing items are: "+i+".jpg",count)
-			# print("Deleting files are: "+i+".jpg",count)
-			# os.remove(path+i+'.jpg')
-			# shutil.move(path+i+'.jpg','/home/manju/Downloads/pavithra/extra/'+i+'.jpg')
+			print("Missing items are: "+i+".xml",count)
+			# print("Deleting files are: "+i+".xml",count)
+			# os.remove(path+i+'.xml')
 
 
 	print("Total xml are:",len(xml))
 	print("Total jpg are:",len(jpg))
 	
 
-path = "/home/manju/Downloads/suma/"
+path = "/home/manju/Desktop/stepmarkdata/manju_StepMark/train/"
 
 find_missing(path)

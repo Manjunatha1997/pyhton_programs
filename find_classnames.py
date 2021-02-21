@@ -19,12 +19,12 @@ def find_classnames(path,num_of_classes):
 
 
 
-		# if len(c) != num_of_classes:
-		# 	print(file,c,count)
+		if len(c) != num_of_classes:
+			print(file,c,count)
 
 
 
-path = '/home/manju/Downloads/pavithra/extra/'
+path = '/home/manju/Desktop/stepmarkdata/stepmarkpresence/'
 num_of_classes = 1
 
 find_classnames(path,num_of_classes)
