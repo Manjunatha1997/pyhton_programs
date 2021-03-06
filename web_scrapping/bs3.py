@@ -11,7 +11,6 @@ divs = web_page.find_all('div', attrs={'class':'defect-thumb'})
 output_path_directory = '/home/manju/Desktop/fabric/'
 
 
-
 count = 0
 img_count = 0
 
@@ -38,5 +37,6 @@ for i in divs:
 
     count += 3
     img_count += 1
+
 
 

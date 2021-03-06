@@ -2,7 +2,7 @@ import os
 
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Desktop/ddd/Manju/'
+path = '/home/manju/rough_extra/'
 
 
 
@@ -12,8 +12,10 @@ for file in files:
 	if file.endswith('.xml'):
 		tree = ET.parse(path+file)
 		root = tree.getroot()
-		l = [elt.tag for elt in root.iter()]
-		if 'name' not in l:
-			print(path+file)
-				
+		for elt in tree.iter():
+			if elt.tag == 'name' and elt.text == 'Chamfer_Absence':
+				print(elt.text)
+				elt.text = 'Chamfer_Presence'
+
+		# tree.write(path+file)
 		

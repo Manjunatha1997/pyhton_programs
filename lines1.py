@@ -23,7 +23,7 @@ height, width, channel = img.shape
 # cv2.line(img,(0,10),(width,10),(0,0,255),1)
 
 
-
+size = 50
 
 def ver():
     x1, y1, x2, y2 = 0, 0, 0, 0
@@ -31,8 +31,8 @@ def ver():
     while x1 < width:
 
         cv2.line(img, (x1, 0), (x2, height), (0, 0, 255), 1)
-        x1 += 10
-        x2 += 10
+        x1 += size
+        x2 += size
 
 
 def hor():
@@ -41,8 +41,8 @@ def hor():
     while y1 < height:
         # if img[] == [0,0,0]
         cv2.line(img, (x1, y1), (width, y2), (0, 0, 255), 1)
-        y1 += 10
-        y2 += 10
+        y1 += size
+        y2 += size
 
 
 def circle():
@@ -57,7 +57,7 @@ def circle():
     # cv2.line(img, (270, 205), (270, 400), (0, 0, 255), 1)
 
 
-# hor()
+hor()
 circle()
 ver()
 

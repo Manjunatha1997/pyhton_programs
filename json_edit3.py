@@ -33,5 +33,5 @@ def json_label_edit(path,label=None):
 		  json.dump(data, json_file,indent=4)
 
 
-path = '/home/manju/Downloads/Deeplab_Images/'
+path = '/home/manju/Downloads/tttttt/'
 json_label_edit(path,'hello')

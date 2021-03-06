@@ -1,15 +1,15 @@
-
 import os
 import shutil
 
 
-path = "/home/manju/magnaflux/overlap_video1/"
+path = '/home/manju/Downloads/manjunath/with_cam2/'
+
 
 
 
 def find_missing(path):
 	res = os.listdir(path)
-	jpg,xml = [],[]
+	jpg,json = [],[]
 
 	for i in res:
 
@@ -18,21 +18,21 @@ def find_missing(path):
 			jpg.append(k[0])
 		
 		else:
-			if i.endswith('.xml'):
+			if i.endswith('.json'):
 				k = i.split('.')
-				xml.append(k[0])
+				json.append(k[0])
 
 	count = 0
 	for i in jpg:
-		if not i in xml:
+		if not i in json:
 			count += 1
 			print("Missing items are: "+i+".jpg",count)
 			# print("Deleting files are: "+i+".jpg",count)
 			# os.remove(path+i+'.jpg')
-			# shutil.move(path+i+'.jpg','/home/manju/magnaflux/overlap_video1_extra/'+i+'.jpg')
+			# shutil.move(path+i+'.jpg','/home/manju/Downloads/manjunath/extra_json/'+i+'.jpg')
 
 
-	print("Total xml are:",len(xml))
+	print("Total json are:",len(json))
 	print("Total jpg are:",len(jpg))
 	
 find_missing(path)

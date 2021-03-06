@@ -47,9 +47,6 @@ for htno in range(starting_htno,ending_htno+1):
             print('closing web browser')
             break
 
-
-
-
         driver.refresh()
 
     except:

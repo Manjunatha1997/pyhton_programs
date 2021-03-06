@@ -1,65 +1,32 @@
 
-import os
-import shutil
-import time
-from datetime import datetime
+from bs4 import BeautifulSoup
+import requests
 
 
-t1 = datetime.now()
+fr = open('ddddddddddd.txt')
 
-path = '/home/manju/Desktop/magna_flux/mf_a/'
+data = fr.readlines()
 
+for url in data:
+	url = url.strip()
+	print(url)
 
-def test_train_split(path):
+	r = requests.get(url)
 
-	res = os.listdir(path)
+	web_page = BeautifulSoup(r.content,features="lxml")
 
-	length = (len(res)/2 ) / 5
-
-	if not os.path.isdir('test'):
-		os.mkdir('test')
-	if not os.path.isdir('train'):
-		os.mkdir('train')
-
-	# test = []
-	# train = []
-
-	count = 0
-	for file in res:
-		if file.endswith('.jpg'):
-			count += 1
-			if count <= length:
-				# test.append(path+file)
-				# test.append(path+file.split('.')[0]+'xml')
-				print('copying into test..........',count)
-				shutil.copyfile(path+file,'test/'+file)
-				shutil.copyfile(path+file.split('.')[0]+'.xml','test/'+file.split('.')[0]+'.xml')
-
-			else:
-				# train.append(path+file)
-				# train.append(path+file.split('.')[0]+'.xml')
-				print('copying into train.......',count)
-				shutil.copyfile(path+file,'train/'+file)
-				shutil.copyfile(path+file.split('.')[0]+'.xml','train/'+file.split('.')[0]+'.xml')
+	code = web_page.find_all('td',attrs={'class':'code'})
 
 
-	# print(len(test))
-	# print(len(train))
-
-	t2 = datetime.now()
-
-	r = t2 - t1
-	print('process finished in :' ,r)
-
-test_train_split(path)
+	for i in code:
+		print('###########################################################################')
+		fa = open('code.txt','a')
+		print(i.text)
+		fa.write(i.text+'\n')
+		fa.close()
+		print('***************************************************************************')
 
 
-
-
-
-
-
-
-
+fr.close()
 
 

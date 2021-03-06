@@ -4,6 +4,9 @@ import shutil
 import time
 
 
+
+t1 = datetime.now()
+
 path = '/home/manju/Desktop/magna_flux/mf_a/'
 
 
@@ -42,8 +45,13 @@ def test_train_split(path):
 
 	# print(len(test))
 	# print(len(train))
+	
+	t2 = datetime.now()
 
-test_train_split
+	r = t2 - t1
+	print('process finished in :' ,r)
+
+test_train_split(path)
 
 
 

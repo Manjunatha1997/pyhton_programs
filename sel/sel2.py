@@ -7,6 +7,7 @@ import pandas as pd
 
 
 
+
 driver = webdriver.Firefox(executable_path='./geckodriver')
 
 driver.get('http://www.results.manabadi.co.in/2020/sri-venkateswara-university-mca-5th-sem-dec-2019-exam-results-09022021.htm')

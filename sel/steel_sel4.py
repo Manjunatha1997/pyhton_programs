@@ -43,28 +43,43 @@ def  scroll_to_end():
 
 scroll_to_end()
 
+time.sleep(2)
+try:
+    extend = driver.find_element_by_xpath('/html/body/div[2]/c-wiz/div[3]/div[1]/div/div/div/div[2]/span')
+    extend.click()
+    time.sleep(1)
+    scroll_to_end()
 
+except:
+    pass
 
-# all = driver.find_elements_by_xpath("//img")
+time.sleep(2)
+try:
+    extend = driver.find_element_by_xpath('/html/body/div[2]/c-wiz/div[3]/div[1]/div/div/div/div/div[5]/input')
+    extend.click()
+    time.sleep(1)
+    scroll_to_end()
+except:
+    pass
 
-all = driver.find_elements_by_tag_name('img')
+# all = driver.find_elements_by_xpath("//img")['src']
 
+web_page = bs(driver.page_source)
+
+all = web_page.find_all('img')
 print(all)
-print(len(all))
+count = 0
+for i in all:
 
-for img in all:
-
-    print(img.get_attribute('alt'))
-    if img.get_attribute('src') != None:
-        if img.get_attribute('src').startswith('http'):
-            print(img.get_attribute('src'))
-
-            image_data = requests.get(img.get_attribute('src')).content
-            fw = open(output_path_directory+'/'+str(datetime.now())+'.jpeg','wb')
+    try:
+        count += 1
+        print(i['src'])
+        if i['src'].startswith('http'):
+            image_data = requests.get(i['src']).content
+            fw = open(output_path_directory+'/'+str(count)+'.jpg','wb')
             fw.write(image_data)
             fw.close()
+    except:
+        pass
 
 
-
-# rg_i Q4LuWd === png
-# rg_i Q4LuWd === jpeg

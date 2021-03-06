@@ -27,9 +27,9 @@ def video_to_frames(cam,out_folder_name,image_name):
     cv2.destroyAllWindows()
 
 
-cam = cv2.VideoCapture("/media/manju/60FC-164B/chamfer presence_rh/WIN_20210212_17_26_11_Pro.mp4")
-out_folder_name = "/media/manju/60FC-164B/Chamfer_Presence_RH"
-image_name = "Chamfer_Presence_"
+cam = cv2.VideoCapture("/home/manju/magnaflux/crack_video.mp4")
+out_folder_name = "/home/manju/magnaflux/crack_video/"
+image_name = "crack_video"
 
 video_to_frames(cam,out_folder_name,image_name)
 

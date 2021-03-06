@@ -24,7 +24,7 @@ def find_classnames(path,num_of_classes):
 
 
 
-path = '/home/manju/Desktop/stepmarkdata/stepmarkpresence/'
+path = '/home/manju/Desktop/scratch/manju/'
 num_of_classes = 1
 
 find_classnames(path,num_of_classes)

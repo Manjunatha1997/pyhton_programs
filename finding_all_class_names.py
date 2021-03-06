@@ -2,7 +2,8 @@ import os
 
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Desktop/ddd/Manju/'
+
+path = '/home/manju/rough_extra/'
 
 def all_class_names(path):
 	class_names = []
@@ -17,4 +18,4 @@ def all_class_names(path):
 
 	print(set(class_names))
 
-all_class_names(path)		
+all_class_names(path)	
