@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = "/home/manju/magnaflux/overlap_video1/"
+path = "/home/manju/Desktop/Good_part_500/"
 
 
 
