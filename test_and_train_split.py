@@ -2,12 +2,12 @@
 import os
 import shutil
 import time
-
+from datetime import datetime
 
 
 t1 = datetime.now()
 
-path = '/home/manju/Desktop/magna_flux/mf_a/'
+path = '/home/manju/Desktop/suprajit/images_line2/all/MR235/'
 
 
 def test_train_split(path):

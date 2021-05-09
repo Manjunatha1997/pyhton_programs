@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
-img = cv2.imread('/home/manju/Pictures/image.jpg')
+
+image = '/home/manju/Desktop/MSIL/19/wavyness_breakage_19_04_2021/wavyness_breakage_19_04_2021_1.jpg'
+
+img = cv2.imread(image)
 img = cv2.resize(img,(640,480))
 
 gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)

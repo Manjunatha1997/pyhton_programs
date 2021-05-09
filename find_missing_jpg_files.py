@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = "/home/manju/Desktop/Good_part_500/"
+path = "/home/manju/Downloads/Manjunath/LH_WOSRS/"
 
 
 
@@ -26,13 +26,15 @@ def find_missing(path):
 	for i in jpg:
 		if not i in xml:
 			count += 1
-			print("Missing items are: "+i+".jpg",count)
-			# print("Deleting files are: "+i+".jpg",count)
+			print("Missing items are: "+path+i+".jpg",count)
+			# print("Deleting files are: "+path+i+".jpg",count)
 			# os.remove(path+i+'.jpg')
-			# shutil.move(path+i+'.jpg','/home/manju/magnaflux/overlap_video1_extra/'+i+'.jpg')
+			# shutil.move(path+i+'.jpg','/home/manju/Downloads/Manjunath/extra/'+i+'.jpg')
 
 
 	print("Total xml are:",len(xml))
-	print("Total jpg are:",len(jpg))
+	print("Total jpg are:",len(jpg))	
+	
+
 	
 find_missing(path)

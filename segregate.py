@@ -4,9 +4,13 @@ import os
 import xml.etree.ElementTree as ET
 
 
-path = '/home/manju/Downloads/image_data/crop_train_dir/'
+path = '/home/manju/Desktop/suprajit/images_line2/test/'
 
-out = '/home/manju/Downloads/image_data/train/'
+out = '/home/manju/Desktop/suprajit/images_line2/testing/'
+
+if not os.path.isdir(out):
+	print('creating directory ....', out)
+	os.mkdir(out)
 
 
 
