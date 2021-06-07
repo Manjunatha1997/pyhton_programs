@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = "/home/manju/Downloads/Manjunath/LH_WOSRS/"
+path = "/home/manju/Desktop/ACB/Prasana_ACB_annotations/Prasana/"
 
 
 
