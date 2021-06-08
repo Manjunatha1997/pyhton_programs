@@ -2,12 +2,17 @@ from tkinter import *
 import PIL
 from PIL import ImageTk
 from PIL import Image
+import cv2
+from pascal_voc_writer import Writer
+from tkinter import simpledialog
 import glob
+
 
 
 root = Tk()
 # root.title('Title')
 # root.iconbitmap('tiktok_logo.png')
+
 
 
 
@@ -40,8 +45,13 @@ def forward(image_number):
 	global button_forward
 	global button_back
 
+	prompt = simpledialog.askstring(title='',prompt='')
+	print(prompt)
+
 	my_label.grid_forget()
 	my_label = Label(image=image_list[image_number-1])
+
+
 
 
 	status_bar = Label(text=f"Image {image_number} of {len(image_list)} ",bd=3, pady=20)
@@ -82,6 +92,40 @@ def back(image_number):
 
 
 
+
+def draw_rectangle_with_drag(event, x, y, flags, param):
+    
+    global ix, iy, drawing, img
+
+    if event == cv2.EVENT_LBUTTONDOWN:
+
+        drawing = True
+        ix = x
+        iy = y          
+    elif event == cv2.EVENT_LBUTTONUP:
+        
+
+        drawing = False
+
+        cv2.rectangle(img, pt1 = (ix,iy),
+                    pt2 = (x,y),
+                    color =(0, 255, 0),
+                    thickness = 3)
+        
+        print([ix,iy,x,y])
+        all_cord.append([ix,iy,x,y])
+
+
+# cv2.namedWindow(winname = "Title of Popup Window")
+# cv2.setMouseCallback('Title of Popup Window',draw_rectangle_with_drag)
+
+
+
+
+
+
+
+
 button_back = Button(root, text="<<", command=back, state=DISABLED)
 button_exit = Button(root, text="Exit Program", command=root.quit)
 button_forward = Button(root, text=">>", command=lambda: forward(2))
@@ -94,3 +138,7 @@ button_forward.grid(row=1, column=2)
 # lle00070 
 
 root.mainloop()
+
+
+
+

@@ -1,5 +1,7 @@
 import cv2
 from pascal_voc_writer import Writer
+from tkinter import simpledialog
+
 import glob
 
 
@@ -25,7 +27,6 @@ def draw_rectangle_with_drag(event, x, y, flags, param):
     global ix, iy, drawing, img
 
     if event == cv2.EVENT_LBUTTONDOWN:
-        print(event,'*********')
 
         drawing = True
         ix = x
@@ -39,8 +40,6 @@ def draw_rectangle_with_drag(event, x, y, flags, param):
     #                     color =(236, 218, 218),
     #                     thickness = 3)
     
-    elif event == cv2.EVENT_LBUTTONUP:
-        print(event)
 
         drawing = False
 
@@ -72,7 +71,7 @@ while True:
         writer = Writer(img_name+'.jpg',640,480)
         for i in all_cord:
 
-            writer.addObject('classname1',i[0],i[1],i[2],i[3])
+            writer.addObject("USER_INP",i[0],i[1],i[2],i[3])
 
         writer.save(out + img_name+'.xml')
         cv2.imwrite(out+image,image1)        
