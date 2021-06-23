@@ -1,7 +1,7 @@
 import glob
 import cv2
 
-path = '/home/manju/Downloads/images (1)/images/'
+path = '/home/manju/Desktop/aug/suma/'
 
 res = glob.glob(path+'*.jpg')
 

@@ -2,9 +2,9 @@ import cv2
 import os
 from datetime import datetime
 
-cam = cv2.VideoCapture("/home/manju/Downloads/object_detection.mp")
-out_folder_name = "/home/manju/Downloads/object_detection_frames/"
-image_name = "Object"
+cam = cv2.VideoCapture("/home/manju/Downloads/WIN_20210621_15_13_38_Pro.mp4")
+out_folder_name = "/home/manju/Desktop/suprajit_MR235/"
+image_name = "MR235"
 
 
 def video_to_frames(cam,out_folder_name,image_name):
@@ -12,7 +12,7 @@ def video_to_frames(cam,out_folder_name,image_name):
     time = datetime.now()
 
     time = str(time).split(' ')
-    time = time[0]+time[1].split('.')[0]
+    time = time[0]
 
 
     if not out_folder_name.endswith('/'):

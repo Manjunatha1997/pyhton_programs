@@ -9,7 +9,7 @@ import os
 
 
 img = cv2.imread('shapes.jpg')
-
+image = img.copy()
 rgb_img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
 gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -20,8 +20,6 @@ ret, thresh_img = cv2.threshold(gray_img,220,255,cv2.THRESH_BINARY)
 # Empty black image 
 
 black_img = np.zeros(img.shape)
-
-
 
 
 
@@ -40,6 +38,9 @@ for c in conts[1:]:
 	cv2.drawContours(black_img,[c],-1,(0,10,0),2)
 	cv2.drawContours(black_img,[box],-1,(255,255,255),1)
 
+	# cv2.drawContours(img,[c],-1,(0,,0),2)
+	cv2.drawContours(img,[box],-1,(0,0,255),1)
+
 	for (x,y) in box:
 		cv2.circle(black_img,(x,y),2,(0,0,255),2)
 		(tl,tr,br,bl) = box
@@ -51,12 +52,18 @@ for c in conts[1:]:
 		# Draw the mid points
 		cv2.circle(black_img,(int(tlX),int(trX)),1,(255,0,0),3)
 		cv2.circle(black_img,(int(brX),int(blX)),1,(255,0,0),3)
-		cv2.line(black_img,(int(tlX),int(trX)),(int(brX),int(blX)),(100,100,100),1)
+		cv2.line(black_img,(int(tlX),int(trX)),(int(brX),int(blX)),(0,0,255),1)
+
+		# Draw the mid points
+		cv2.circle(img,(int(tlX),int(trX)),1,(255,255,0),3)
+		cv2.circle(img,(int(brX),int(blX)),1,(255,255,0),3)
+		cv2.line(img,(int(tlX),int(trX)),(int(brX),int(blX)),(0,0,200),1)
 
 		# claculate the distance based on the mid points.
 		dA = dist.euclidean((tlX,trX),(brX,blX))
 		# print the size in PX on each contour rectangle
 		cv2.putText(black_img,str(dA)+' px',(int(tlX)-10,int(trX)-10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(255,255,255),1)
+		cv2.putText(img,str(dA)+' px',(int(tlX)-10,int(trX)-10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(0,0,0),1)
 
 
 		
@@ -67,20 +74,27 @@ for c in conts[1:]:
 		cv2.circle(black_img,(int(tlX),int(trX)),1,(255,0,0),3)
 		cv2.circle(black_img,(int(brX),int(blX)),1,(255,0,0),3)
 		cv2.line(black_img,(int(tlX),int(trX)),(int(brX),int(blX)),(100,100,100),1)
+		# Draw the mid points
+		cv2.circle(img,(int(tlX),int(trX)),1,(255,255,0),3)
+		cv2.circle(img,(int(brX),int(blX)),1,(255,255,0),3)
+		cv2.line(img,(int(tlX),int(trX)),(int(brX),int(blX)),(0,0,255),1)
 
 		# claculate the distance based on the mid points.
 		dB = dist.euclidean((tlX,trX),(brX,blX))
 
 		# print the size in PX on each contour rectangle
 		cv2.putText(black_img,str(dB)+' px',(int(tlX)+10,int(trX)+10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(255,255,255),1)
+		cv2.putText(img,str(dB)+' px',(int(tlX)+10,int(trX)+10),cv2.FONT_HERSHEY_SIMPLEX,0.4,(0,0,0),1)
 
 
 
 
-
-cv2.imshow('Original Image ',img)
+cv2.imshow('Original Image',image)
+cv2.imshow('Output image ',img)
 # cv2.imshow('gray_img', gray_img)
 # cv2.imshow('thresh', thresh_img)
 cv2.imshow('Output Image ',black_img)
+# cv2.imwrite('shapes_output.jpg',img)
+# cv2.imwrite('shapes_output1.jpg',black_img)
 cv2.waitKey(0)
 

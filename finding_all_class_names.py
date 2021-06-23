@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Desktop/ACB/Divya_updated/'
+path = '/home/manju/Desktop/bewww/test/'
 
 def all_class_names(path):
 	class_names = []
