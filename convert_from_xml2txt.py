@@ -5,11 +5,14 @@ import os
 import glob
 
 lut={}
-lut["PPWOSRSLH"]=0
-lut["Clip_Presence"]=1
-lut["Felt_Presence"]=2
-lut["Clip_Absence"]=3
-lut["Felt_Absence"]=4
+
+lut["1st_DC_Bend"]=0
+# lut["1st_DC_Bend_Good"]=1
+lut["2nd_Inner_Loose_Winding"]=1
+# lut["Good_Wire"]=3
+lut["Inner_Grinding"]=2
+# lut["Tape_Not_Visible"]=5
+lut["Tape_Visible"]=3
 
 
 def convert_coordinates(size, box):
@@ -28,7 +31,7 @@ def convert_coordinates(size, box):
 
 def convert_xml2yolo(lut):
 
-    for fname in glob.glob("/home/manju/Desktop/LH_WOSRS/labels/val/*.xml"):
+    for fname in glob.glob("D:\\Suprajith_poc\\newsup\\defects\\images\\train\\*.xml"):
         
         xmldoc = minidom.parse(fname)
         

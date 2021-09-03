@@ -2,9 +2,9 @@ import cv2
 import os
 from datetime import datetime
 
-cam = cv2.VideoCapture("/home/manju/Downloads/WIN_20210621_15_13_38_Pro.mp4")
-out_folder_name = "/home/manju/Desktop/suprajit_MR235/"
-image_name = "MR235"
+cam = cv2.VideoCapture("D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence.mp4")
+out_folder_name = "D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence\\"
+image_name = "Tape_Visible_Absence"
 
 
 def video_to_frames(cam,out_folder_name,image_name):
@@ -15,12 +15,12 @@ def video_to_frames(cam,out_folder_name,image_name):
     time = time[0]
 
 
-    if not out_folder_name.endswith('/'):
-        out_folder_name = out_folder_name + '/'
+    if not out_folder_name.endswith('\\'):
+        out_folder_name = out_folder_name + '\\'
 
     try:
         if not os.path.exists(out_folder_name):
-            os.makedirs(out_folder_name)
+            os.mkdir(out_folder_name)
     except OSError:
         print('Error: Creating directory of',out_folder_name)
 

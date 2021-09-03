@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = "/home/manju/Desktop/ACB/Prasana_ACB_annotations/Prasana/"
+path = "D:\\sup_poc_1\\train\\"
 
 
 

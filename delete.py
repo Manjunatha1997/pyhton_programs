@@ -1,47 +1,24 @@
 
-import cv2
-import redis
-import numpy as np
 
 
-r = redis.StrictRedis(host='localhost',port=6379,password=None)
 
+arr = [1,2,3,4,5,6,7]
+d = 2
+n = len(arr)
+def rotate_left(arr,d,n):
+    for i in range(d):
+        rot_by_one(arr,n)
+        print(arr)
+        
+def rot_by_one(arr,n):
+    temp = arr[0]
+    for i in range(n-1):
+        arr[0] = arr[i+1]
 
-def video_read(video):
-
-	cap = cv2.VideoCapture(video)
-
-	img_counter = 0
-
-	while True:
-		ret, frame = cap.read()
-
-		if ret:
-			retval, buffer = cv2.imencode('.jpg', frame)
-			img1_bytes = np.array(buffer).tobytes()
-			r.set(img_counter,img1_bytes)
-			cv2.imshow('image',frame)
-			img_counter += 1
-
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-
-
-	cap.release()
-	cv2.destroyAllWindows()
-
-
-# video = 0
-
-# video_read(video)
+    arr[n-1] = temp
+    # print(arr)
 
 
 
 
-
-
-
-
-
-
-
+rotate_left(arr,d,n)

@@ -2,7 +2,7 @@
 import os
 import shutil
 
-path = "/home/manju/Desktop/ddd/Manju/"
+path = "D:\\Suprajith_poc\\1st2ndtvig\\poc\\tv\\"
 
 
 def find_missing(path):

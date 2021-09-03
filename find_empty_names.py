@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Downloads/Manjunath/LH_WOSRS/'
+path = 'D:\\sup_poc_1\\train\\'
 
 
 def empty_names(path):

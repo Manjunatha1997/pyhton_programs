@@ -4,9 +4,9 @@ import os
 import xml.etree.ElementTree as ET
 
 
-path = '/home/manju/Desktop/ACB/Divya/'
+path = 'C:\\Users\\lovel\\OneDrive\\Desktop\\plasmo\\plasmo_dataset\\images\\train\\'
 
-out = '/home/manju/Desktop/ACB/RedSpring/'
+out = 'C:\\Users\\lovel\\OneDrive\\Desktop\\plasmo\\plasmo_dataset\\images\\train_out\\'
 
 if not os.path.isdir(out):
 	print('creating directory ....', out)

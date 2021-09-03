@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = '/home/manju/Desktop/bewww/test/'
+path = 'E:\\data\\images\\train\\'
 
 def all_class_names(path):
 	class_names = []
@@ -13,14 +13,20 @@ def all_class_names(path):
 			for elt in root.iter():
 				if elt.tag == 'name':
 					class_names.append(elt.text)
+					# print(file)
 					
 	# print(len(class_names))
 	# print(class_names.count('RedSpring'))
-	class_names = set(class_names)
-	class_names = list(class_names)
-	class_names.sort()
+	# class_names = set(class_names)
+	# class_names = list(class_names)
+	# class_names.sort()
 
-	print(class_names)
+	temp = {}
+	for i in class_names:
+		temp[i] = class_names.count(i)
+
+	# print(class_names)
+	print(temp)
 
 all_class_names(path)
 

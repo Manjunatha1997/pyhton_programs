@@ -3,9 +3,9 @@ import glob
 import xml.etree.ElementTree as ET
 import cv2
 
-path = '/home/manju/Desktop/bewww/train/'
+path = 'C:\\Users\\lovel\\Downloads\\matrix_annotations\\'
 
-out_path = '/home/manju/Desktop/bewww/crop_out_plasma/'
+out_path = 'C:\\Users\\lovel\\Downloads\\matrix_annotations_out\\'
 
 
 if not os.path.isdir(out_path):
