@@ -1,0 +1,26 @@
+<annotation>
+	<folder>bur</folder>
+	<filename>WIN_20211013_13_15_30_Pro.jpg</filename>
+	<path>/home/lincode/Desktop/indo/bur/WIN_20211013_13_15_30_Pro.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3840</width>
+		<height>2160</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>burr</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1581</xmin>
+			<ymin>860</ymin>
+			<xmax>1737</xmax>
+			<ymax>1007</ymax>
+		</bndbox>
+	</object>
+</annotation>

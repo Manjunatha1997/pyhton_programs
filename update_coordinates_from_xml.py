@@ -27,8 +27,3 @@ for file in res:
 
 	tree.write(file)
 
-
-
-
-
-	

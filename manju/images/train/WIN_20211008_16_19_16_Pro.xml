@@ -1,0 +1,50 @@
+<annotation>
+	<folder>thread Absence</folder>
+	<filename>WIN_20211008_16_19_16_Pro.jpg</filename>
+	<path>D:\Divya\thread Absence\WIN_20211008_16_19_16_Pro.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1920</width>
+		<height>1080</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>thread_absence</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>245</xmin>
+			<ymin>579</ymin>
+			<xmax>450</xmax>
+			<ymax>776</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>thread_absence</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>259</xmin>
+			<ymin>802</ymin>
+			<xmax>465</xmax>
+			<ymax>990</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>thread_presence</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>970</xmin>
+			<ymin>804</ymin>
+			<xmax>1077</xmax>
+			<ymax>914</ymax>
+		</bndbox>
+	</object>
+</annotation>

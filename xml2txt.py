@@ -1,8 +1,6 @@
 import argparse
 import os
-
 import sys
-
 from transformer import Transformer
 
 

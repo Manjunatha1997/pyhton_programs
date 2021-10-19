@@ -1,43 +1,46 @@
 
-
-
-# resize 1920x1080
-# color_contrast (higher,lower)
-
-# inp : 4 images 
-# output :  15 images
-
-
-
+import numpy as np
+import imgaug as ia
+import imgaug.augmenters as iaa
 import cv2
+import xml.etree.ElementTree as ET
 import glob
-
-path = '/home/manju/Desktop/aug/all/*.jpg'
-
-out = '/home/manju/Desktop/aug/all_out/'
-
-res = glob.glob(path)
-
-for file in res:
-	image_name = file.split('/')[-1]
-	img = file
-
-	img = cv2.imread(img)
-	alpha = 1.5 # Contrast control (1.0-3.0)
-	beta = 0 # Brightness control (0-100)
-
-	adjusted = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
-	adjusted1 = cv2.convertScaleAbs(img, alpha=alpha-3.0, beta=beta)
-
-	resized = cv2.resize(img,(1920,1080))
-
-	cv2.imwrite(out+'original_'+image_name,img)
-	cv2.imwrite(out+'highContrast_'+image_name,adjusted1)
-	cv2.imwrite(out+'lowContrast_'+image_name,adjusted)
-	cv2.imwrite(out+'resized_'+image_name,resized)
+import imageio
 
 
+input_path = 'C:\\Users\\lovel\\OneDrive\\Desktop\\rnd\\train\\big\\'
 
+
+res = glob.glob(input_path+'*.jpg')
+
+
+## Augmentations
+
+affine = iaa.Affine(scale=(0.5, 1.5))
+contrast = iaa.LogContrast(gain=(0.6, 1.4), per_channel=True)
+hue = iaa.MultiplyHue((0.5, 1.5))
+gray_scale = iaa.Grayscale(alpha=(0.0, 1.0))
+brightness = iaa.AddToBrightness((-30, 30))
+
+augment_list = {'contrast':contrast,'affine':affine,"hue":hue,"gray_scale":gray_scale,"brightness":brightness}
+
+
+for img in res:
+
+	for augment in augment_list:
+
+		
+		# reading the image
+		image = imageio.imread(img)
+
+		# augmenting the image
+		images_aug = augment_list[augment](image=image)
+
+		# writing the augmented image 
+		cv2.imwrite(img.replace('.jpg',augment+'.jpg'),images_aug)
+		print(augment,'augmented..... for ',img)
+		
+	print('****************************************')
 
 
 

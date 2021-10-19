@@ -1,7 +1,7 @@
 import glob
 import cv2
 
-path = 'D:\\Suprajith_poc\\alldata\\1st_DC_Bend_images\\new\\'
+path = 'E:\\BRh\\'
 
 res = glob.glob(path+'*.jpg')
 

@@ -6,13 +6,7 @@ import glob
 
 lut={}
 
-lut["1st_DC_Bend"]=0
-# lut["1st_DC_Bend_Good"]=1
-lut["2nd_Inner_Loose_Winding"]=1
-# lut["Good_Wire"]=3
-lut["Inner_Grinding"]=2
-# lut["Tape_Not_Visible"]=5
-lut["Tape_Visible"]=3
+lut["Thread_Presence"]=0
 
 
 def convert_coordinates(size, box):
@@ -31,7 +25,7 @@ def convert_coordinates(size, box):
 
 def convert_xml2yolo(lut):
 
-    for fname in glob.glob("D:\\Suprajith_poc\\newsup\\defects\\images\\train\\*.xml"):
+    for fname in glob.glob("C:\\Users\\lovel\\Downloads\\tpt\\images\\train\\*.xml"):
         
         xmldoc = minidom.parse(fname)
         

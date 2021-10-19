@@ -257,9 +257,18 @@ def aug_img_bndbox( source_path,dest_path ,augment_list):
                     # print('list yes')
                 object_list,image_aug ,shape= objects_coord_aug(jason,augment,image)
             jason,img_name,xml_name = edit_jason(jason,object_list,aug,shape)
+            # print(jason,xml_name,dest_path,shape,'####################################')
+            print('#############################################')
+            print(jason,'jasonnnnnnnnnnnnnnn')
+            print(xml_name,'xml_nameeeeeeeeeeeeeeee')
+            print(dest_path)
+            print(shape)
+            print('#############################################')
+
             write_xml(jason,xml_name,dest_path,shape)
             write_image(dest_path,image_aug,img_name)
             print(xml , aug ,'augmented !')
+
 
 
 
@@ -270,12 +279,12 @@ if __name__ == "__main__":
     # augmentations = {"blend":blend,"rotate_90":rotate_90,"rotate_180":rotate_180,
     # 'rotate':rotate,'flip_hr':flip_hr,'flip_vr':flip_vr,'affine':move,'contrast':contrast,'resize':resize,'crop':crop,
     #             'brightness':brightness , "drop":drop}
-    source_path = f'D:\\sup_poc_1\\train'
+    source_path = f'C:\\Users\\lovel\\Downloads\\tpt\\images\\train'
     dest_path = source_path +"_aug/"
     # "blend":blend,"rotate_90":rotate_90,"rotate_180":rotate_180,
     # 'rotate':rotate,'flip_hr':flip_hr,'flip_vr':flip_vr,'affine':move,'contrast':contrast,'resize':resize,'crop':crop,
     #             'brightness':brightness , "drop":dro'
-    augment_list = ["brightness","flip_hr","flip_vr","affine","contrast","resize","drop","noise"]#,"brightness" ,'flip_hr','flip_vr','resize'
+    augment_list = ["brightness","flip_hr","flip_vr","affine","contrast","resize","drop","noise","rotate","rotate_90","rotate_180"]#,"brightness" ,'flip_hr','flip_vr','resize'
     p = Process(target=aug_img_bndbox,args=[source_path,dest_path,augment_list])
     p.start()
     p.join()
