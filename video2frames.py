@@ -1,11 +1,11 @@
 import cv2
 import os
+import glob
 from datetime import datetime
 
-cam = cv2.VideoCapture("D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence.mp4")
-out_folder_name = "D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence\\"
-image_name = "Tape_Visible_Absence"
 
+
+videos_path = 'D:\\DHL\\*.mp4'
 
 def video_to_frames(cam,out_folder_name,image_name):
 
@@ -25,20 +25,28 @@ def video_to_frames(cam,out_folder_name,image_name):
         print('Error: Creating directory of',out_folder_name)
 
     currentframe = 0
-    while (True):
-        ret, frame = cam.read()
-        if ret:
-            name =out_folder_name+image_name+'_'+time+ '_' + str(currentframe) + '.jpg'
-            print('Creating...' + name)
-            cv2.imwrite(name, frame)
-            currentframe += 1
-        else:
-            break
+    for i in cam:
 
-    cam.release()
-    cv2.destroyAllWindows()
+        print(i)
+            
+        while (True):
+            ret, frame = i.read()
+            if ret:
+                name =out_folder_name+image_name+'_'+time+ '_' + str(currentframe) + '.jpg'
+                # print('Creating...' + name)
+                cv2.imwrite(name, frame)
+                currentframe += 1
+            else:
+                break
 
+        i.release()
+        cv2.destroyAllWindows()
 
-video_to_frames(cam,out_folder_name,image_name)
+caps = [cv2.VideoCapture(video) for video in glob.glob(videos_path)]
+
+out_folder_name = "D:\\DHL_data\\"
+image_name = "DHL"
+
+video_to_frames(caps,out_folder_name,image_name)
 
 
