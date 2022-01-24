@@ -1,8 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = 'D:\\sup_poc_1\\train\\'
-
+path = 'D:\\indoData\\onlydent\\flip_dent_22\\'
 
 def empty_names(path):
 	files = os.listdir(path)
@@ -13,7 +12,8 @@ def empty_names(path):
 			l = [elt.tag for elt in root.iter()]
 			if 'name' not in l:
 				print(path+file)
-				# os.remove(path+file)
+				os.remove(path+file)
+				os.remove(path+file.replace('.xml', '.jpg'))
 
 				# sp = file.split('.')
 				# print(path+sp[0]+'.'+sp[1]+'.jpg')

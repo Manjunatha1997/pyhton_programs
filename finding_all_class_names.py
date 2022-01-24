@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = 'E:\\new_tabl\\images\\test\\'
+path = 'D:\\yolov5_auto\\indomim\\images\\train\\'
 
 def all_class_names(path):
 	class_names = []
