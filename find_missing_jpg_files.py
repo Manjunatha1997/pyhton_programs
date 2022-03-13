@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = "D:\\sup_poc_1\\train\\"
+path = "C:\\Users\\Manju\\Downloads\\images\\images\\"
 
 
 
@@ -29,7 +29,7 @@ def find_missing(path):
 			print("Missing items are: "+path+i+".jpg",count)
 			# print("Deleting files are: "+path+i+".jpg",count)
 			# os.remove(path+i+'.jpg')
-			# shutil.move(path+i+'.jpg','/home/manju/Downloads/Manjunath/extra/'+i+'.jpg')
+			shutil.move(path+i+'.jpg','C:\\Users\\Manju\\Downloads\\images\\extra\\'+i+'.jpg')
 
 
 	print("Total xml are:",len(xml))

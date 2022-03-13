@@ -3,9 +3,15 @@ import os
 import glob
 from datetime import datetime
 
+from pathy import shutil
+
 
 
 videos_path = 'D:\\DHL\\*.mp4'
+
+
+out_folder_name = "D:\\DHL_data\\"
+image_name = "DHL"
 
 def video_to_frames(cam,out_folder_name,image_name):
 
@@ -44,8 +50,6 @@ def video_to_frames(cam,out_folder_name,image_name):
 
 caps = [cv2.VideoCapture(video) for video in glob.glob(videos_path)]
 
-out_folder_name = "D:\\DHL_data\\"
-image_name = "DHL"
 
 video_to_frames(caps,out_folder_name,image_name)
 

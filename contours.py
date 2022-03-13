@@ -9,13 +9,19 @@ img = cv2.resize(img,(640,480))
 gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 ret, thr = cv2.threshold(gray_img,127,255,0)
-contours,_ = cv2.findContours(thr,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
-# print(contours,type(contours))
-print(len(contours))
-# print(contours[0])
-cv2.drawContours(img,contours,-1,(0,0,255),2)
+_,contours,_ = cv2.findContours(thr,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
+
+
+temp = []
+for c in contours:
+    print(cv2.contourArea(c))
+    temp.append(cv2.contourArea(c))
+    print(c,'every contour')
+
+
+print(contours[0])
+cv2.drawContours(img,contours,-1,(0,0,255),4)
 
 cv2.imshow('image',img)
-cv2.imshow('thr',thr)
 cv2.waitKey(0)
 

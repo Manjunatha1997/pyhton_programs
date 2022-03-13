@@ -1,18 +1,13 @@
+import os
 
 
-# importing libraries
-import cv2
-import numpy as np
+res = os.listdir('D:\\schneider\\images_with_txt\\images_with_txt\\')
 
-# reading the image data from desired directory
-img = cv2.imread("dent_2a_22_1.jpg")
-# cv2.imshow('Image',img)
-
-# counting the number of pixels
-total_pixels = np.sum(img)
-print(total_pixels)
-
-
-
-
-
+for i in res:
+	
+	# x = res+i
+	# print(x)
+	# file_size = os.path.getsize('d:/file.jpg')
+	# print(i,os.path.getsize('D:\\schneider\\images_with_txt\\images_with_txt\\'+i))
+	if os.path.getsize('D:\\schneider\\images_with_txt\\images_with_txt\\'+i) == 0:
+		print('s')
