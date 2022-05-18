@@ -1,0 +1,9 @@
+inference_images,inspection_time,status,reason
+['localhost:3306/62852adc502167da79bb57d9.jpg'],2022-05-18 22:50:28.158994,Accepted,['Model1']
+['localhost:3306/62852ae0502167da79bb57da.jpg'],2022-05-18 22:50:32.008482,Accepted,['Model1']
+['localhost:3306/62852ae4502167da79bb57db.jpg'],2022-05-18 22:50:36.502065,Accepted,['Model1']
+['localhost:3306/62852aea502167da79bb57dc.jpg'],2022-05-18 22:50:42.237275,Rejected,['Model1']
+['localhost:3306/62852aee502167da79bb57dd.jpg'],2022-05-18 22:50:46.272272,Rejected,['Model1']
+['localhost:3306/62852af1502167da79bb57de.jpg'],2022-05-18 22:50:49.344926,Rejected,['Model1']
+['localhost:3306/62852af8502167da79bb57df.jpg'],2022-05-18 22:50:56.561449,Accepted,['Model1']
+['localhost:3306/62852afd502167da79bb57e0.jpg'],2022-05-18 22:51:01.177668,Accepted,['Model1']
