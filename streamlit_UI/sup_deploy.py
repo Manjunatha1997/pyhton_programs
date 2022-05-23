@@ -15,7 +15,6 @@ import pandas as pd
 from common_utils import *
 from datetime import datetime
 import os
-import os
 from datetime import date
 import pandas as pd
 from csv import writer
@@ -26,10 +25,13 @@ import plotly.graph_objects as go
 import glob
 
 
+cwd = r'D:\python_programs\streamlit_UI'
+print(cwd)
+
 def create_csv():
 	today_date = date.today()
 	today_date = str(today_date)
-	today_date_csv_file = 'reports/'+today_date+'.csv'
+	today_date_csv_file = cwd+'/reports/'+today_date+'.csv'
 
 	if not os.path.exists(today_date_csv_file):
 		with open(today_date_csv_file, 'w') as f:
@@ -41,7 +43,7 @@ def add_data(inference_images,inspection_time,status,reason,selected_model):
 	today_date = date.today()
 	today_date = str(today_date)
 	# today_date_csv_file = today_date+'.csv'
-	today_date_csv_file = 'reports/'+today_date+'.csv'
+	today_date_csv_file = cwd+'/reports/'+today_date+'.csv'
 
 
 	with open(today_date_csv_file, 'a', newline='') as f_object:  
@@ -77,7 +79,7 @@ with st.sidebar:
 
 ## Home
 if selected == 'Home':
-	img =  cv2.cvtColor(cv2.imread('Lincode-1592836225218.webp'),cv2.COLOR_BGR2RGB)
+	img =  cv2.cvtColor(cv2.imread(cwd+'/Lincode-1592836225218.webp'),cv2.COLOR_BGR2RGB)
 	img = cv2.resize(img,(1920,1080))
 
 	
@@ -111,7 +113,7 @@ if selected == 'Operator':
 	REPORTS = st.sidebar.dataframe(None)
 
 
-	df = pd.read_csv('inspection_count.csv')
+	df = pd.read_csv(cwd+'/inspection_count.csv')
 
 
 	st.sidebar.info('Quick Report')
@@ -149,14 +151,14 @@ if selected == 'Operator':
 			df['total'][0] += 1
 			
 			
-			df.to_csv('inspection_count.csv',header=True, index=False)
+			df.to_csv(cwd+'/inspection_count.csv',header=True, index=False)
 			REPORTS.dataframe(df)
 			################################## Detailed report #################
 			create_csv()
 			file_name = str(bson.ObjectId())
-			fname = './datadrive/'+file_name+'.jpg'
+			fname = cwd+'/datadrive/'+file_name+'.jpg'
 			cv2.imwrite(fname,frame)
-			fname_s = fname.replace('./datadrive/','localhost:3306/')
+			fname_s = fname.replace(cwd+'/datadrive/','localhost:3306/')
 
 			add_data([fname_s],inspection_time,is_accepted,detector_predictions,selected_model)
 		btn = False
@@ -165,7 +167,7 @@ if selected == 'Operator':
 		df['accepted'][0] = 0
 		df['rejected'][0] = 0
 		df['total'][0] = 0
-		df.to_csv('inspection_count.csv',header=True, index=False)
+		df.to_csv(cwd+'/inspection_count.csv',header=True, index=False)
 		REPORTS.dataframe(df)
 
 
@@ -180,7 +182,7 @@ if selected == 'Detailed Report':
 		if date_selected:
 			detailed_report = st.dataframe(None)
 			
-			today_date_csv_file = 'reports/'+str(date_selected)+'.csv'
+			today_date_csv_file = cwd+'/reports/'+str(date_selected)+'.csv'
 			data = pd.read_csv(today_date_csv_file)
 			detailed_report.dataframe(data)
 			st.success('Total Accepted '+str(len(data[data['status']=='Accepted'])))
@@ -194,54 +196,112 @@ if selected == 'Detailed Report':
 		st.write('Data Not Found')
 
 
+## Data visuailzation
 if selected == 'Data Visualization':
+	## one day data visualization
+	date_selected = st.date_input ( 'Select Date' , value=None , min_value=None , max_value=None , key=None)
+
+
 	try:
-		date_selected = st.date_input ( 'Select Date' , value=None , min_value=None , max_value=None , key=None)
-		today_date_csv_file = 'reports/'+str(date_selected)+'.csv'
+		today_date_csv_file = cwd+'/reports/'+str(date_selected)+'.csv'
 		data = pd.read_csv(today_date_csv_file)
 
-		## Pie Chart
-		fig = go.Figure(
-		go.Pie(
-		labels = ['Accepted','Rejected','Total'],
-		values =[(len(data[data['status']=='Accepted'])),(len(data[data['status']=='Rejected'])),str(len(data))],
-		hoverinfo = "label+percent",
-		textinfo = "value"
-		))
+		col1, col2 = st.columns(2)
+		with col1:
+			## Pie Chart
+			fig = go.Figure(
+			go.Pie(
+			labels = ['Accepted','Rejected'],
+			values =[(len(data[data['status']=='Accepted'])),(len(data[data['status']=='Rejected']))],
+			hoverinfo = "label+percent",
+			textinfo = "value",
+			# color=["red", "goldenrod"], 
+			# color_discrete_map="identity"
+			# color_discrete_sequence = px.colors.sequential.RdBu
+			
+			
 
-		st.header("Today Analysis")
-		st.plotly_chart(fig)
+			))
+			colors = ['green', 'red']
+			fig.update_traces(marker = dict(colors = colors, line=dict(color='#000000', width=2)))
+			st.header("Today Analysis")
+			st.plotly_chart(fig,use_container_width=True)
+
+
+		with col2:
+			## Pie Chart
+			fig = go.Figure(
+			go.Pie(
+			labels = ['MR192','MR197','MR235','MR244','MR270'],
+			values =[(len(data[data['selected_model']=='MR192'])),(len(data[data['selected_model']=='MR197'])),(len(data[data['selected_model']=='MR235'])),(len(data[data['selected_model']=='MR244'])),(len(data[data['selected_model']=='MR270']))],
+			hoverinfo = "label+percent",
+			textinfo = "value"
+			))
+			st.header("Today Analysis")
+			st.plotly_chart(fig,use_container_width=True)
+
+
+		
 
 	except:
-		st.write('Data Not Found Today')
+		st.write('Today Data Not Found ')
 
-
-	# date_selected = st.date_input ( 'Select Date' , value=None , min_value=None , max_value=None , key=None)
-	# today_date_csv_file = 'reports/'+str(date_selected)+'.csv'
-
+	## Total data visualization
 	try:
 
 		f_accepted = 0
 		f_rejected = 0
 		f_total = 0
-		for file in glob.glob('./reports/*.csv'):
+		MR192_count = 0
+		MR197_count = 0
+		MR235_count = 0
+		MR244_count = 0
+		MR270_count = 0
+		
+
+		
+		for file in glob.glob(cwd+'/reports/*.csv'):
 
 			data = pd.read_csv(file)
 			f_accepted += len(data[data['status']=='Accepted'])
 			f_rejected += len(data[data['status']=='Rejected'])
+			MR192_count += (len(data[data['selected_model']=='MR192']))
+			MR197_count += (len(data[data['selected_model']=='MR197']))
+			MR235_count += (len(data[data['selected_model']=='MR235']))
+			MR244_count += (len(data[data['selected_model']=='MR244']))
+			MR270_count += (len(data[data['selected_model']=='MR270']))
+
 			f_total += (len(data))
 
+		col1, col2 = st.columns(2)
+		with col1:
+			## Pie Chart
+			fig = go.Figure(
+			go.Pie(
+			labels = ['Accepted','Rejected'],
+			values =[f_accepted,f_rejected],
+			hoverinfo = "label+percent",
+			textinfo = "value"
+			))
+			
+			colors = ['green', 'red']
+			fig.update_traces(marker = dict(colors = colors, line=dict(color='#000000', width=2)))
 
-		## Pie Chart
-		fig = go.Figure(
-		go.Pie(
-		labels = ['Accepted','Rejected','Total'],
-		values =[f_accepted,f_rejected,f_total],
-		hoverinfo = "label+percent",
-		textinfo = "value"
-		))
-
-		st.header("Total Analysis")
-		st.plotly_chart(fig)
+			st.header("Total Analysis")
+			st.plotly_chart(fig,use_container_width=True)
+		
+		with col2:
+			## Pie Chart
+			fig = go.Figure(
+			go.Pie(
+			labels = ['MR192','MR197','MR235','MR244','MR270'],
+			values =[MR192_count,MR197_count,MR235_count,MR244_count,MR270_count],
+			hoverinfo = "label+percent",
+			textinfo = "value"
+			))
+			st.header("Total Analysis")
+			st.plotly_chart(fig,use_container_width=True)
 	except:
 		st.write('Data Not Found')
+
+
