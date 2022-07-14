@@ -177,7 +177,10 @@ if selected == 'Operator':
 
 ## Detailed Report
 if selected == 'Detailed Report':
-	date_selected = st.date_input ( 'Select Date' , value=None , min_value=None , max_value=None , key=None)
+	col1, col2, col3 = st.columns(3)
+	with col1:
+		date_selected = st.date_input ( '' , value=None , min_value=None , max_value=None , key=None)
+
 	try:
 		if date_selected:
 			detailed_report = st.dataframe(None)
@@ -188,8 +191,62 @@ if selected == 'Detailed Report':
 			st.success('Total Accepted '+str(len(data[data['status']=='Accepted'])))
 			st.warning('Total Rejected '+str(len(data[data['status']=='Rejected'])))
 			st.info('Total Count '+str(len(data)))
+	
+
+			
+			## Download Button for csv
+			@st.cache
+			def convert_df(df):
+				return df.to_csv().encode('utf-8')
 
 
+			csv = convert_df(data)
+			with col2:
+				st.write('')
+				st.write('')
+				
+
+				st.download_button(
+				"Download CSV File",
+				csv,
+				str(datetime.now())+".csv",
+				"text/csv",
+				key='download-csv'
+				)
+			
+
+			## getting images from the datadrive folder
+			images = [i.replace('localhost:3306/',cwd+'/datadrive/') for i in data["inference_images"]]
+			print(images)
+			## creating data folder for downloading zip file
+			if os.path.isdir('data'):
+				shutil.rmtree('data')
+			os.makedirs('data')
+
+			## writing images to data folder
+			for i in images:
+				img_path = i[2:-2]
+				img_path = img_path.replace('\\','/')
+
+				print(img_path,'img_path',type(img_path))
+				x = img_path.split('/')[-1]
+
+			
+				img = cv2.imread(img_path)
+				print(type(img))
+				print('./data/'+x)
+				cv2.imwrite('./data/'+x,img)
+			
+			## make zip file
+			shutil.make_archive("data_images", 'zip', "data")
+			
+			with col3:
+				st.write('')
+				st.write('')
+				
+				## download button for zip file
+				with open('data_images.zip', 'rb') as f:
+					st.download_button('Download Zip File', f, file_name='data.zip')  # Defaults to 'application/octet-stream'
 
 
 	except:

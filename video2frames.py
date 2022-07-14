@@ -13,6 +13,8 @@ videos_path = 'D:\\DHL\\*.mp4'
 out_folder_name = "D:\\DHL_data\\"
 image_name = "DHL"
 
+
+
 def video_to_frames(cam,out_folder_name,image_name):
 
     time = datetime.now()
@@ -21,8 +23,8 @@ def video_to_frames(cam,out_folder_name,image_name):
     time = time[0]
 
 
-    if not out_folder_name.endswith('\\'):
-        out_folder_name = out_folder_name + '\\'
+    if not out_folder_name.endswith('/'):
+        out_folder_name = out_folder_name + '/'
 
     try:
         if not os.path.exists(out_folder_name):

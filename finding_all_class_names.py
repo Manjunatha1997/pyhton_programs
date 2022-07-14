@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 
-path = 'D:\\yolov5_auto\\indomim\\images\\train\\'
+path = r'E:\11_july_2022_indomim\dent_cum40_flagged\dent_cum40_flagged\\'
 
 def all_class_names(path):
 	class_names = []
@@ -14,12 +14,11 @@ def all_class_names(path):
 				if elt.tag == 'name':
 					class_names.append(elt.text)
 					# print(file)
-					
-	# print(len(class_names))
-	# print(class_names.count('RedSpring'))
-	# class_names = set(class_names)
-	# class_names = list(class_names)
-	# class_names.sort()
+				if elt.tag == 'name' and elt.text == 'solder_bridge':
+					print(file)
+		
+
+		
 
 	temp = {}
 	for i in class_names:

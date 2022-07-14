@@ -3,14 +3,17 @@ import os
 import cv2
 from datetime import date, datetime
 
-path = 'D:\\msil\\good_bad\\'
+path = 'C:\\Users\\Manju\\Downloads\\bottom_no_solder\\crops_need\\'
 
-out_path = 'D:\\out_crop\\'
+out_path = 'C:\\Users\\Manju\\Downloads\\bottom_no_solder\\crops_need\\'
 
 
-res = glob.glob(path+'*.jpg')
+if not os.path.isdir(out_path):
+    os.makedirs(out_path)
 
-# 9550853643 balu
+
+res = glob.glob(path+'*.PNG')
+
 
 for file in res:
 

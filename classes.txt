@@ -1,9 +1,1 @@
-dent
-holes
-chamfer_absence
-chamfer_presence
-thread_absence
-thread_presence
-burr
-
-
+pin

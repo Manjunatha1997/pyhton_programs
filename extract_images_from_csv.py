@@ -13,17 +13,26 @@ def extract_images_from_csv(csv_file,indir,outdir,flag):
     if flag is True:
         flagged_data= df.loc[df['flagged'] == True]
         input_images = flagged_data['input_images']
-        for inp_images in input_images:
+        remarks = flagged_data['remark']
+        print(remarks,'remarks....')
+        for k, inp_images in enumerate(input_images):
             x = inp_images.split(',')
-            for i in x:
-                image = i[2:-1]
-                if image.endswith("'"):
-                    image = image[:-1]
-                image = image.replace('http://127.0.0.1:3306',indir)
-                img = cv2.imread(image)
-                cv2.imwrite(outdir+image.split('/')[-1],img)
-                print(image,c)
-                c += 1
+            try:
+
+                remark = remarks[k]
+                print(remark,' remark...',k)
+                # input()
+                for i in x:
+                    image = i[2:-1]
+                    if image.endswith("'"):
+                        image = image[:-1]
+                    image = image.replace('http://127.0.0.1:3306',indir)
+                    # img = cv2.imread(image)
+                    # cv2.imwrite(outdir+image.split('/')[-1],img)
+                    # print(image,c)
+                    c += 1
+            except:
+                continue
 
 
     else:
@@ -47,7 +56,7 @@ def extract_images_from_csv(csv_file,indir,outdir,flag):
 
 
 
-csv_file = r'D:\python_programs\62866672320c60a2701237ab.csv'
+csv_file = r'D:\indomim_tirupati\8mmburr_good\8mmburr_good\62ce6349ea2a18f687a847d8.csv'
 extract_images_from_csv(csv_file,indir='/home/mim/Main/dataimages',outdir='./extracted_images/',flag=True)
 
 

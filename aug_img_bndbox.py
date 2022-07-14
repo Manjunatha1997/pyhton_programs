@@ -279,12 +279,17 @@ if __name__ == "__main__":
     # augmentations = {"blend":blend,"rotate_90":rotate_90,"rotate_180":rotate_180,
     # 'rotate':rotate,'flip_hr':flip_hr,'flip_vr':flip_vr,'affine':move,'contrast':contrast,'resize':resize,'crop':crop,
     #             'brightness':brightness , "drop":drop}
-    source_path = f'C:\\Users\\Manju\\Documents\\batch1\\batch1'
+    source_path = f'C:\\Users\\Manju\\Desktop\\scratch_data\\smart_ups_scratch'
     dest_path = source_path +"_aug/"
     # "blend":blend,"rotate_90":rotate_90,"rotate_180":rotate_180,
     # 'rotate':rotate,'flip_hr':flip_hr,'flip_vr':flip_vr,'affine':move,'contrast':contrast,'resize':resize,'crop':crop,
     #             'brightness':brightness , "drop":dro'
-    augment_list = ["brightness","affine","contrast","drop","noise"]#,"brightness" ,'flip_hr','flip_vr','resize'
+    
+# augmentations = {"blend":blend,"rotate_90":rotate_90,"rotate_180":rotate_180,
+#     'rotate':rotate,'flip_hr':flip_hr,'flip_vr':flip_vr,'affine':move,'contrast':contrast,'resize':resize,'crop':crop,
+#                 'brightness':brightness , "drop":drop,"noise":noise}
+    augment_list = ["brightness","affine","contrast","drop","noise","flip_hr","flip_vr","resize","blend"]
+
     p = Process(target=aug_img_bndbox,args=[source_path,dest_path,augment_list])
     p.start()
     p.join()

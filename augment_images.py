@@ -8,7 +8,7 @@ import glob
 import imageio
 
 
-input_path = 'C:\\Users\\lovel\\OneDrive\\Desktop\\rnd\\train\\big\\'
+input_path = 'C:\\Users\\Manju\\Pictures\\Camera Roll\\maini_mea\\'
 
 
 res = glob.glob(input_path+'*.jpg')

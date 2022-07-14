@@ -1,39 +1,40 @@
-import os
+import hydralit_components as hc
+import streamlit as st
 
 
-from datetime import date
-import pandas as pd
-from csv import writer
+hc.hydralit_experimental(True)
 
 
+modal_code = """
+<div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+Hydralit!
+</button>
 
-def create_csv():
-    today_date = date.today()
-    today_date = str(today_date)
-    today_date_csv_file = today_date+'.csv'
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
 
-    if not os.path.exists(today_date_csv_file):
-        with open(today_date_csv_file, 'w') as f:
-            f.write('inference_images,status,reason')
-
-
-
-def add_data(inference_images,status,reason):
-    today_date = date.today()
-    today_date = str(today_date)
-    today_date_csv_file = today_date+'.csv'
-
-    with open(today_date_csv_file, 'a', newline='') as f_object:  
-        # Pass the CSV  file object to the writer() function
-        writer_object = writer(f_object)
-        # Result - a writer object
-        # Pass the data in the list as an argument into the writerow() function
-        writer_object.writerow([inference_images,status,reason])  
-        # Close the file object
-        f_object.close()
-
-
-data = pd.read_csv(r'D:\python_programs\streamlit_UI\reports\2022-05-18.csv')
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+"""
 
 
+st.markdown(modal_code,unsafe_allow_html=True)
+query_param = st.experimental_get_query_params()
 
+if query_param:
+    st.write('We caputred these values from the experimental modal form using Javascript + HTML + Streamlit + Hydralit Components.')
+    st.write(query_param)

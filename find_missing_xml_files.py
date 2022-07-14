@@ -2,7 +2,7 @@
 import os
 import shutil
 
-path = "D:\\Suprajith_poc\\1st2ndtvig\\poc\\tv\\"
+path = r"D:\indomim_tirupati\third_part_data\cum_40_jun_15_22\cum_40_jun_15_22\\"
 
 
 def find_missing(path):
@@ -26,7 +26,7 @@ def find_missing(path):
 			count += 1
 			print("Missing items are: "+i+".xml",count)
 			# print("Deleting files are: "+i+".xml",count)
-			# os.remove(path+i+'.xml')
+			os.remove(path+i+'.xml')
 
 
 	print("Total jpg are:",len(xml))

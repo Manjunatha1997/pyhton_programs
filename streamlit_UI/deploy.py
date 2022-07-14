@@ -20,8 +20,8 @@ import pandas as pd
 from csv import writer
 import csv
 import bson
-
-
+from st_clickable_images import clickable_images
+import requests
 
 
 
@@ -32,11 +32,11 @@ def create_csv():
 
 	if not os.path.exists(today_date_csv_file):
 		with open(today_date_csv_file, 'w') as f:
-			f.write('inference_images,inspection_time,status,reason\n')
+			f.write('inference_images,inspection_time,status,reason,selected_model\n')
 
 
 
-def add_data(inference_images,inspection_time,status,reason):
+def add_data(inference_images,inspection_time,status,reason,selected_model):
 	today_date = date.today()
 	today_date = str(today_date)
 	# today_date_csv_file = today_date+'.csv'
@@ -48,7 +48,7 @@ def add_data(inference_images,inspection_time,status,reason):
 		writer_object = writer(f_object)
 		# Result - a writer object
 		# Pass the data in the list as an argument into the writerow() function
-		writer_object.writerow([inference_images,inspection_time,status,reason])  
+		writer_object.writerow([inference_images,inspection_time,status,reason,selected_model])  
 		# Close the file object
 		f_object.close()
 
@@ -56,11 +56,13 @@ def add_data(inference_images,inspection_time,status,reason):
 ## Footer
 footer = """
 <style>
-#MainMenu {visibility: hidden;}
+#MainMenu {visibility: hidden;margin-top:20px;}
 footer { visibility: hidden;}
 </style>
 """
 st.markdown(footer, unsafe_allow_html=True)
+
+st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 ## sidebar
 with st.sidebar:
@@ -76,14 +78,16 @@ with st.sidebar:
 if selected == 'Home':
 	img =  cv2.cvtColor(cv2.imread('Lincode-1592836225218.webp'),cv2.COLOR_BGR2RGB)
 	img = cv2.resize(img,(1920,1080))
-
-	
 	st.image(img)
+
+
+
+
 
 ## Operator
 if selected == 'Operator':
 	st.success('LIVE FEED')
-	col1, col2,col3 = st.columns(3)
+	col1, col2,col3 = st.columns([4,1,1])
 	with col2:
 		run = st.checkbox('Run')
 	with col1:
@@ -91,11 +95,10 @@ if selected == 'Operator':
 
     "Select Model",
 
-    ('Model1','Model2'))
+    ('MR192','MR197','MR235','MR244','MR270'))
 	with col3:
 		btn = st.button('Inspect')
 	
-	model_selected = st.write('Selected Model:'+model)
 
 
 	FRAME_WINDOW = st.image([])
@@ -119,12 +122,13 @@ if selected == 'Operator':
 
 	while run:
 		predicted_frame = CacheHelper().get_json('frame')
-		# predicted_frame = cv2.resize(predicted_frame,(1920,1080))
+		predicted_frame = cv2.resize(predicted_frame,(1920,1080))
 
 		frame = predicted_frame.copy()
 		detector_predictions = CacheHelper().get_json('defect_list')
 		is_accepted = CacheHelper().get_json('is_accepted')
 		detector_predictions = ['Model1']
+		selected_model = model
 		if model in detector_predictions:
 			is_accepted = 'Accepted'
 		else:
@@ -155,7 +159,7 @@ if selected == 'Operator':
 			cv2.imwrite(fname,frame)
 			fname_s = fname.replace('./datadrive/','localhost:3306/')
 
-			add_data([fname_s],inspection_time,is_accepted,detector_predictions)
+			add_data([fname_s],inspection_time,is_accepted,detector_predictions,selected_model)
 		btn = False
 
 	else:
@@ -169,12 +173,14 @@ if selected == 'Operator':
 
 
 
+
 ## Detailed Report
 if selected == 'Detailed Report':
 	date_selected = st.date_input ( 'Select Date' , value=None , min_value=None , max_value=None , key=None)
 	try:
 		if date_selected:
 			detailed_report = st.dataframe(None)
+			
 			today_date_csv_file = 'reports/'+str(date_selected)+'.csv'
 			data = pd.read_csv(today_date_csv_file)
 			detailed_report.dataframe(data)

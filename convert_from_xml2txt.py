@@ -6,7 +6,7 @@ import glob
 
 lut={}
 
-lut["Thread_Presence"]=0
+lut["pin"]=0
 
 
 def convert_coordinates(size, box):
@@ -25,7 +25,7 @@ def convert_coordinates(size, box):
 
 def convert_xml2yolo(lut):
 
-    for fname in glob.glob("C:\\Users\\lovel\\Downloads\\tpt\\images\\train\\*.xml"):
+    for fname in glob.glob(r"C:\Users\Manju\Desktop\autent\*.xml"):
         
         xmldoc = minidom.parse(fname)
         

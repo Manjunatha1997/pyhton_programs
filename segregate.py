@@ -1,16 +1,19 @@
+from logging import root
 import shutil
 import glob
 import os
 import xml.etree.ElementTree as ET
 
 
-path = 'C:\\Users\\lovel\\OneDrive\\Desktop\\plasmo\\plasmo_dataset\\images\\train\\'
 
-out = 'C:\\Users\\lovel\\OneDrive\\Desktop\\plasmo\\plasmo_dataset\\images\\train_out\\'
+
+path = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16\\'
+
+out = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16_out\\'
 
 if not os.path.isdir(out):
 	print('creating directory ....', out)
-	os.mkdir(out)
+	os.makedirs(out)
 
 
 

@@ -41,6 +41,7 @@ test_loader = DataLoader(dataset=test_dataset,batch_size=batch_size,shuffle=True
 # Initialize Network
 model = NN(input_size=input_size,num_classes=num_classes).to(device)
 
+
 # Loss and Optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(),lr=learning_rate)

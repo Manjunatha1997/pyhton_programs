@@ -2,9 +2,9 @@ import cv2
 import os
 from datetime import datetime
 
-cam = cv2.VideoCapture("D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence.mp4")
-out_folder_name = "D:\\Suprajith_poc\\newsup\\Tape_Visible_Absence\\"
-image_name = "Tape_Visible_Absence"
+cam = cv2.VideoCapture("C:\\Users\\Manju\\Desktop\\coils\\signal-2022-05-10-174653.mp4") # signal-2022-05-10-174653.mp4
+out_folder_name = "C:\\Users\\Manju\\Desktop\\coils\\one\\"
+image_name = "one_"
 
 
 
@@ -46,6 +46,6 @@ def video_to_frames(cam,out_folder_name,image_name):
     cv2.destroyAllWindows()
 
 
-# video_to_frames(cam,out_folder_name,image_name)
+video_to_frames(cam,out_folder_name,image_name)
 
 
