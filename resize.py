@@ -1,9 +1,9 @@
 import glob
 import cv2
 
-path = r'D:\Bridgestone\images\splice bare\\'
+path = r'C:\Users\Manju\Desktop\aaa\\'
 
-res = glob.glob(path+'*.bmp')
+res = glob.glob(path+'*.jpg')
 
 for file in res:
 	print(file)

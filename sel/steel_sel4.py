@@ -17,7 +17,7 @@ if not os.path.isdir(output_path_directory):
     os.mkdir(output_path_directory)
 
 
-driver = webdriver.Firefox(executable_path='./geckodriver')
+driver = webdriver.Firefox(executable_path=r"C:\Users\Manju\Downloads\geckodriver-v0.31.0-win64\geckodriver.exe")
 driver.maximize_window()
 
 

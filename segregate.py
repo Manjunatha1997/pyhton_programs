@@ -11,6 +11,8 @@ path = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16\\'
 
 out = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16_out\\'
 
+
+
 if not os.path.isdir(out):
 	print('creating directory ....', out)
 	os.makedirs(out)

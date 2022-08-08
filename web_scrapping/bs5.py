@@ -5,7 +5,7 @@ import os
 r = requests.get('https://www.cottonworks.com/resources/defects-glossary/')
 web_page = bs(r.content)
 
-output_path_directory = '/home/manju/Desktop/fabric_testing/testing1/'
+output_path_directory = './testing1/'
 
 
 filters = web_page.select('form#fabric-type select option')

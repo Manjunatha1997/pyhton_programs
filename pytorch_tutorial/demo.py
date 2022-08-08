@@ -5,22 +5,26 @@ import cv2
 
 
 
-# Model
-model = torch.hub.load('D:\\yolov5_auto', 'yolov5s', pretrained=True)
+# # Model
+# model = torch.hub.load('D:\\yolov5_auto', 'yolov5s', pretrained=True)
 
-# Images
-dir = 'D:\\yolov5_auto\\data\\images\\*'
+# # Images
+# dir = 'D:\\yolov5_auto\\data\\images\\*'
 
-res = glob.glob(dir)
+# res = glob.glob(dir)
 
-imgs = [cv2.imread(img) for img in res]
-# Inference
-results = model(imgs)
-results.print()  # or .show(), .save()
+# imgs = [cv2.imread(img) for img in res]
+# # Inference
+# results = model(imgs)
+# results.print()  # or .show(), .save()
 
-print(results)
+# print(results)
 
 
 # results.save()
+
+
+
+
 
 
