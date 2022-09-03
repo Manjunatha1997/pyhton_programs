@@ -13,7 +13,8 @@ class Predictor():
 		self.common_iou = 0.45
 		self.line_thickness = None
 		## If your renaming labels then defects names should be renamed labels , for ex. your label is 'cell phone' if you want to rename that to 'Mobile Phone' then defecet should be 'Mobile Phone'
-		self.defects = ['cell phone'] #['bus','chair','tv','bottle','person']
+		self.defects = [] #['bus','chair','tv','bottle','person']
+		self.features = []
 		self.ind_thresh = {} #{'bus':0.1,'person':0.1,'chair':0.1}
 		self.rename_labels = {} # {'person':'manju'}
 		## avoid labels with in the given co-ordinates
@@ -151,15 +152,24 @@ class Predictor():
 
 	def check_kanban(self):
 		defect_list = []
+		feature_list = []
+		response = {}
 		for i in self.detector_predictions:
 			if i in self.defects:
 				defect_list.append(i)
+		
+		for feature in self.features:
+			if not feature in self.detector_predictions:
+				feature_list.append(feature)
 
-		if bool(defect_list):
+		if bool(defect_list) or bool(feature_list):
 			is_accepted = "Rejected"
 		else:
 			is_accepted = "Accepted"
-		return is_accepted
+		response['is_accepted'] = is_accepted
+		response['defect_list'] = defect_list
+		response['feature_list'] = feature_list
+		return response
 
 
 cap = cv2.VideoCapture(0)
