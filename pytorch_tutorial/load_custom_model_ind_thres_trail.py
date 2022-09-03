@@ -42,6 +42,7 @@ def run_inference_hub(image):
 		confidence = list(result_dict.get('confidence').values())[i]
 
 		
+		
 
 		## bounding box and text 
 
