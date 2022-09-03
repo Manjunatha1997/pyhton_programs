@@ -13,11 +13,12 @@ class Predictor():
 		self.common_iou = 0.45
 		self.line_thickness = None
 		## If your renaming labels then defects names should be renamed labels , for ex. your label is 'cell phone' if you want to rename that to 'Mobile Phone' then defecet should be 'Mobile Phone'
-		self.defects = ['Cell Phone'] #['bus','chair','tv','bottle','person']
+		self.defects = ['cell phone'] #['bus','chair','tv','bottle','person']
 		self.ind_thresh = {} #{'bus':0.1,'person':0.1,'chair':0.1}
-		self.rename_labels = {'cell phone':'Cell Phone'} # {'person':'manju'}
+		self.rename_labels = {} # {'person':'manju'}
 		## avoid labels with in the given co-ordinates
-		self.avoid_labels_cords = [] # [{'xmin':0,'ymin':82,'xmax':640,'ymax':480}]
+		self.avoid_labels_cords = [] # [{'xmin':0,'ymin':0,'xmax':640,'ymax':480}]
+		self.avoid_required_labels = [] # ['person','cell phone']
 
 		##
 		self.detector_predictions = None # This will update from the detector predictions
@@ -47,9 +48,16 @@ class Predictor():
 			## avoid labels with the given co ordinates
 			skip = None
 			if self.avoid_labels_cords:
-				for crd in self.avoid_labels_cords:
-					if round(xmin) >= crd['xmin'] and round(ymin) >= crd['ymin'] and round(xmax) <= crd['xmax'] and round(ymax) <= crd['ymax']:
-						skip = True
+				if bool(self.avoid_required_labels):
+					for label in self.avoid_required_labels:
+						if label == name:
+							for crd in self.avoid_labels_cords:
+								if round(xmin) >= crd['xmin'] and round(ymin) >= crd['ymin'] and round(xmax) <= crd['xmax'] and round(ymax) <= crd['ymax']:
+									skip = True
+				else:
+					for crd in self.avoid_labels_cords:
+						if round(xmin) >= crd['xmin'] and round(ymin) >= crd['ymin'] and round(xmax) <= crd['xmax'] and round(ymax) <= crd['ymax']:
+							skip = True
 			if skip :
 				continue
 
@@ -167,4 +175,5 @@ while True:
 	print(status)
 	cv2.imshow('frame',predicted_image)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
+		cv2.imwrite('test_image.jpg',frame_c)
 		break
