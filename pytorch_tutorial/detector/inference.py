@@ -9,6 +9,7 @@ class Predictor():
 	def __init__(self):
 		self.model_dir = '.'
 		self.weights_path = r"yolov5s.pt"
+		self.image_size = 1280
 		self.common_confidence = 0.1
 		self.common_iou = 0.45
 		self.line_thickness = None
@@ -18,20 +19,20 @@ class Predictor():
 		self.ind_thresh = {} #{'bus':0.1,'person':0.1,'chair':0.1}
 		self.rename_labels = {} # {'person':'manju'}
 		## avoid labels with in the given co-ordinates
-		self.avoid_labels_cords = [] # [{'xmin':0,'ymin':0,'xmax':640,'ymax':480}]
-		self.avoid_required_labels = [] # ['person','cell phone']
+		self.avoid_labels_cords = [{'xmin':0,'ymin':0,'xmax':1280,'ymax':720},{'xmin':0,'ymin':6,'xmax':569,'ymax':548}]
+		self.avoid_required_labels = ['person'] # ['person','cell phone']
 
 		##
 		self.detector_predictions = None # This will update from the predictions
 
 	def load_model(self):
-		model = torch.hub.load(self.model_dir,'custom',path=self.weights_path,source = 'local')
+		model = torch.hub.load(self.model_dir,'custom',path=self.weights_path,source = 'local',force_reload=True)
 		model.conf = self.common_confidence
 		model.iou = self.common_iou
 		return model
 
 	def run_inference_hub(self,model, image):
-		results = model(image)
+		results = model(image,size=self.image_size)
 		labels = results.pandas().xyxy[0]
 		labels = list(labels['name'])
 		result_dict = results.pandas().xyxy[0].to_dict()
@@ -166,9 +167,9 @@ class Predictor():
 			is_accepted = "Rejected"
 		else:
 			is_accepted = "Accepted"
-		response['is_accepted'] = is_accepted
-		response['defect_list'] = defect_list
-		response['feature_list'] = feature_list
+		response['status'] = is_accepted
+		response['defects'] = defect_list
+		response['features'] = feature_list
 		return response
 
 
@@ -176,15 +177,51 @@ if __name__ == '__main__':
 	cap = cv2.VideoCapture(0)
 	predictor = Predictor()
 	model = predictor.load_model()
+	
+	# frame1 = cv2.imread(r"C:\Users\Manju\Downloads\top.png")
+	# frame2 = cv2.imread(r"C:\Users\Manju\Downloads\bottom.png")
+	# frame3 = cv2.imread(r"C:\Users\Manju\Downloads\side1.png")
+	# frame4 = cv2.imread(r"C:\Users\Manju\Downloads\side2.png")
+	# frame5 = cv2.imread(r"C:\Users\Manju\Downloads\side3.png")
+	# frame6 = cv2.imread(r"C:\Users\Manju\Downloads\side4.png")
+	# frame7 = cv2.imread(r"C:\Users\Manju\Downloads\side5.png")
+	# frame8 = cv2.imread(r"C:\Users\Manju\Downloads\side6.png")
 
-	while True:
+
+	# frames = [frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8]
+
+	from datetime import datetime
+	while True:	
+		x1 = datetime.now()
+		# for frame in frames:	
 		ret, frame = cap.read()
-		frame = cv2.flip(frame,1)
+		# frame = cv2.flip(frame,1)
+		# frame = cv2.resize(frame,(1280,720))
 		frame_c = frame.copy()
+		t1 = datetime.now()
+		predictor.defects = ['person']
 		predicted_image, detector_labels, coordinates = predictor.run_inference_hub(model,frame)
-		status = predictor.check_kanban()
-		print(status)
-		cv2.imshow('frame',predicted_image)
+		response = predictor.check_kanban()
+		print(response)
+		cv2.imshow('frame1',predicted_image)
+		
+
+		
+		predictor.defects = ['chair']
+		predicted_image, detector_labels, coordinates = predictor.run_inference_hub(model,frame_c)
+		response = predictor.check_kanban()
+		t2 = datetime.now()
+		print(f"Individual inference time is !!!!! {(t2-t1).total_seconds()} seconds ")
+
+		# status = predictor.check_kanban()
+		# print(status)
+		cv2.imshow('frame2',predicted_image)
 		if cv2.waitKey(1) & 0xFF == ord('q'):
 			cv2.imwrite('test_image.jpg',frame_c)
 			break
+
+	x2 = datetime.now()
+	print(f"Overall  inference time is !!!!! {(x2-x1).total_seconds()} seconds ")
+	# input('enter..')
+
+
