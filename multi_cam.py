@@ -2,13 +2,10 @@
 import cv2
 import multiprocessing
 
-
 config_list = [
 	{"camera_id":0,"camera_index":"1cam"},
 	{"camera_id":"C:/Users/Manju/Videos/a/demo.mp4","camera_index":"video"}
 ]
-
-
 
 def cam_preview(preview_name,cam_id):
     

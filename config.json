@@ -1,4 +1,4 @@
 [
-	{"camera_id":"C:\\Users\\Manju\\Desktop\\yolov5_auto\\signal-2022-01-24-150214_001.mp4","camera_index":"1cam"},
-	{"camera_id":0,"camera_index":"2cam"}
+	{"camera_id":0,"camera_index":"1cam"},
+	{"camera_id":"C:/Users/Manju/Videos/a/demo.mp4","camera_index":"video"}
 ]

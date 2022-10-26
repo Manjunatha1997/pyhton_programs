@@ -1,25 +1,47 @@
-import numpy as np
-import cv2
+
+import os
 import glob
+import xml.etree.ElementTree as ET
+import cv2
+import bson
+from matplotlib import image
 
-files = glob.glob("/home/manju/Desktop/crop_test/*.jpg")
+path = r'C:\Users\Manju\Downloads\indomim_anno\view_12Copy\good\\'
 
-img = cv2.imread("/home/manju/Desktop/crop_test/40.jpg")
-img = cv2.resize(img,(800,600))
-gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+print(path)
+# files = os.listdir(path)
+files = glob.glob(path+'*.xml')
+print(files)
+out_path = r'C:\Users\Manju\Downloads\indomim_anno\view_12Copy\good_out\\'
 
-template = cv2.imread("/home/manju/Desktop/crop_temp.jpg", 0)
-w, h = template.shape[::-1]
+if not os.path.isdir(out_path):
+	os.makedirs(out_path)
 
-res = cv2.matchTemplate(gray,template,cv2.TM_CCOEFF_NORMED)
+for file in files:
+	# xmin,ymin,xmax,ymax = 216,134,403,291
 
-thr = 0.68
+	# image = cv2.imread(file)
+	# crop_image = image[int(ymin):int(ymax),int(xmin):int(xmax)]
+	# print(crop_image)
+	# cv2.imwrite(f'{out_path}{str(bson.ObjectId())}.png',crop_image)
+	
+	tree = ET.parse(file)
+	root = tree.getroot()
+	for object in root.findall('object'):
+		name = object.find('name').text
+		xmin = object.find('bndbox/xmin').text
+		ymin = object.find('bndbox/ymin').text
+		xmax = object.find('bndbox/xmax').text
+		ymax = object.find('bndbox/ymax').text
 
-loc = np.where(res >= thr)[::-1]
-loc = zip(*loc)
-for i in loc:
-    cv2.rectangle(img,i,(i[0]+w,i[1]+h),(255,0,0),2)
-    print(w,h,i)
-cv2.imshow("image",img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+		img = file.replace('.xml','.png')
+		# image = tyuioplokjmuyhgtvfrcdxzsedcxswz
+		image = cv2.imread(img)
+		print(xmin,ymin,xmax,ymax)
+
+
+		crop_image = image[int(ymin):int(ymax),int(xmin):int(xmax)]
+		print(crop_image)
+		cv2.imwrite(f'{out_path}{str(bson.ObjectId())}.png',crop_image)
+		
+		

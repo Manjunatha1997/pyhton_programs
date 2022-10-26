@@ -7,9 +7,9 @@ import xml.etree.ElementTree as ET
 
 
 
-path = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16\\'
+path = r'C:\Users\Manju\Downloads\indo\indo\\'
 
-out = r'D:\indomim_tirupati\third_part_data\cum_jun_16\cum_jun_16_out\\'
+out = r'C:\Users\Manju\Downloads\indo\indo_out\\'
 
 
 

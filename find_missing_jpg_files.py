@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-path = r"E:\11_july_2022_indomim\new_defects_chamfer_burr_\new_defects_chamfer_burr_\\"
+path = r"D:\indomim_tirupati\indoData\hole_missing\\"
 
 
 

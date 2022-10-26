@@ -1,3 +1,4 @@
+from grpc import Status
 import torch
 import os
 import glob
@@ -8,8 +9,8 @@ import numpy as np
 class Predictor():
 	def __init__(self):
 		self.model_dir = '.'
-		self.weights_path = r"yolov5s.pt"
-		self.image_size = 1280
+		self.weights_path = r"C:\Users\Manju\Downloads\exp5\exp5\weights\best.pt"
+		self.image_size = 640
 		self.common_confidence = 0.1
 		self.common_iou = 0.45
 		self.line_thickness = None
@@ -19,8 +20,8 @@ class Predictor():
 		self.ind_thresh = {} #{'bus':0.1,'person':0.1,'chair':0.1}
 		self.rename_labels = {} # {'person':'manju'}
 		## avoid labels with in the given co-ordinates
-		self.avoid_labels_cords = [{'xmin':0,'ymin':0,'xmax':1280,'ymax':720},{'xmin':0,'ymin':6,'xmax':569,'ymax':548}]
-		self.avoid_required_labels = ['person'] # ['person','cell phone']
+		self.avoid_labels_cords = [{'xmin':184,'ymin':188,'xmax':379,'ymax':385}]
+		self.avoid_required_labels = ['burr','operation_missing'] # ['person','cell phone']
 
 		##
 		self.detector_predictions = None # This will update from the predictions
@@ -148,7 +149,7 @@ class Predictor():
 					
 
 		self.detector_predictions = labels_
-		for img in results.imgs:
+		for img in results.ims:
 			return img, labels_, coordinates
 
 	def check_kanban(self):
@@ -171,57 +172,52 @@ class Predictor():
 		response['defects'] = defect_list
 		response['features'] = feature_list
 		return response
+	
+	def check_measurement_status(self,reference_threshold,measurement_values):
+		
+
+		measurement_values = {"top":0.25,"bottom":0.4,"left":0.8,"right":0.1}
+		if not bool(measurement_values):
+			defect_list['coordinates'] = 'coordinates not found'
+
+		defect_list = {}
+
+		for reg,thr in measurement_values.items():
+			if reference_threshold < thr:
+				defect_list[reg] = thr
+
+		
+		
+		if bool(measurement_values):
+			status = 'Rejected'
+		else:
+			status = 'Accepted' 
+
+		return defect_list,status	
+
+
+
+	
 
 
 if __name__ == '__main__':
-	cap = cv2.VideoCapture(0)
+	# cap = cv2.VideoCapture(0)
 	predictor = Predictor()
 	model = predictor.load_model()
 	
-	# frame1 = cv2.imread(r"C:\Users\Manju\Downloads\top.png")
-	# frame2 = cv2.imread(r"C:\Users\Manju\Downloads\bottom.png")
-	# frame3 = cv2.imread(r"C:\Users\Manju\Downloads\side1.png")
-	# frame4 = cv2.imread(r"C:\Users\Manju\Downloads\side2.png")
-	# frame5 = cv2.imread(r"C:\Users\Manju\Downloads\side3.png")
-	# frame6 = cv2.imread(r"C:\Users\Manju\Downloads\side4.png")
-	# frame7 = cv2.imread(r"C:\Users\Manju\Downloads\side5.png")
-	# frame8 = cv2.imread(r"C:\Users\Manju\Downloads\side6.png")
-
-
-	# frames = [frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8]
-
 	from datetime import datetime
 	while True:	
-		x1 = datetime.now()
-		# for frame in frames:	
-		ret, frame = cap.read()
-		# frame = cv2.flip(frame,1)
-		# frame = cv2.resize(frame,(1280,720))
-		frame_c = frame.copy()
+		# ret, frame = cap.read()
+		frame = cv2.imread(r"D:\634649cab8df93a2c6ec7669.jpg")
 		t1 = datetime.now()
-		predictor.defects = ['person']
+		predictor.weights_path = r"C:\Users\Manju\Downloads\exp5\exp5\weights\best.pt"
 		predicted_image, detector_labels, coordinates = predictor.run_inference_hub(model,frame)
-		response = predictor.check_kanban()
-		print(response)
-		cv2.imshow('frame1',predicted_image)
-		
-
-		
-		predictor.defects = ['chair']
-		predicted_image, detector_labels, coordinates = predictor.run_inference_hub(model,frame_c)
-		response = predictor.check_kanban()
 		t2 = datetime.now()
-		print(f"Individual inference time is !!!!! {(t2-t1).total_seconds()} seconds ")
 
-		# status = predictor.check_kanban()
-		# print(status)
-		cv2.imshow('frame2',predicted_image)
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			cv2.imwrite('test_image.jpg',frame_c)
-			break
+		response = predictor.check_kanban()
 
-	x2 = datetime.now()
-	print(f"Overall  inference time is !!!!! {(x2-x1).total_seconds()} seconds ")
-	# input('enter..')
+		cv2.imshow('predicted_image',predicted_image)
+		cv2.waitKey(0)
 
+		print(f"Inference time is !!!!! {(t2-t1).total_seconds()} seconds ")
 
