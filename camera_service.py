@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
 	if cc.web_cam is True:
 		consolidated_config.append({'web_cam':cc.web_cam_config})
-	if cc.basler_cam is True:
+	if cc.baumer_cam is True:
 		cc.__main__(cc.basler_cam_config)
 	if cc.lucid_cam is True:
 		cc.__main__(cc.lucid_cam_config)

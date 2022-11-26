@@ -1,4 +1,3 @@
-from grpc import Status
 import torch
 import os
 import glob
@@ -9,7 +8,7 @@ import numpy as np
 class Predictor():
 	def __init__(self):
 		self.model_dir = '.'
-		self.weights_path = r"C:\Users\Manju\Downloads\exp5\exp5\weights\best.pt"
+		self.weights_path = r"C:\Users\Manju\Documents\smart_ups_weights\best.pt"
 		self.image_size = 640
 		self.common_confidence = 0.1
 		self.common_iou = 0.45
@@ -33,7 +32,7 @@ class Predictor():
 		return model
 
 	def run_inference_hub(self,model, image):
-		results = model(image,size=self.image_size)
+		results = model(image, size=640)
 		labels = results.pandas().xyxy[0]
 		labels = list(labels['name'])
 		result_dict = results.pandas().xyxy[0].to_dict()

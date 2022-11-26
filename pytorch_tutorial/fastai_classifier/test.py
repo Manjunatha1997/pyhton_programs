@@ -1,30 +1,25 @@
 import numpy as np
+import glob
 import cv2
 import numpy as np
+from fastai.vision.all import *
+import platform
+import pathlib
 
-import string
-import argparse
-
-# from opt_module import *
-from PIL import Image
-from fastai.vision import *
-# mp.set_start_method('spawn')
-def load_classifier(opt):
-    device = opt.device
-    model=load_learner(opt.fastai_classifier_weights) 
-    return model
+os_type = platform.system()
+if os_type == 'Windows':
+    pathlib.PosixPath = pathlib.WindowsPath
 
 
-def get_classifier_prediction(frame,classifier):
-    frame=cv2.resize(frame,(224,224))
-#     image = cv2.rotate(crop, cv2.ROTATE_90_CLOCKWISE,cv2.flip,cv2.brightnes,cv2) # Working on the rotation
-                                
-    img = Image(pil2tensor(frame, dtype=np.float32).div_(255))#.div_(255)
-    pred=classifier.predict(img)   # getting predictions per frame
-    # print(pred[0])
-#     print(np.amax(to_np(pred[2])))
-#     print(pred)
-    prediction = str(pred[0])
-#     pred = str(pred[2])
-    # print(prediction)
-    return prediction ,pred
+
+
+
+model = load_learner(r'd:\indomim_tirupati\classyfy_det\burr35_cross.pkl')
+
+
+
+for file in glob.glob(r'C:\Users\Manju\Downloads\indomim_anno\view_7-Copy\bad_out\test\*.png'):
+    img = cv2.imread(file)
+
+    pred,_,thr=model.predict(img)  
+    print(pred)

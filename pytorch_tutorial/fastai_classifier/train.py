@@ -1,34 +1,29 @@
-from fastai.vision import *
-from fastai.metrics import error_rate, accuracy, FBeta
-from fastai.metrics import  *
-from fastai.imports import *
-import torchvision
-from fastai import *
-from fastai.torch_core import *
-from fastai.layers import *
-# from torchvision.models.densenet import densenet121
-# from torchvision.models.vgg import vgg19_bn
-import torchvision.models as TorchModels 
-from sklearn.metrics import *
-import warnings
-warnings.filterwarnings('ignore')
+from fastai2.vision import * 
+from fastai.vision.data import Path
+from fastai.vision.all import *
 
 
-dataset_dir = 'D:\indomim_tirupati\indoData\segregated\chamfer_thread_out'
+# path = r'/media/lincode3090/Backup/manju/indomim_tirupati/classification_det/classifiaction/classfy_seg_data/'
+path = r'/media/lincode3090/Backup/manju/indomim_tirupati/classification_det/classifiaction/dataset_view7/'
+
+epochs = 100
+batch_size = 32
 
 
-path = Path(dataset_dir)
+data_ = DataBlock(
+    blocks=(ImageBlock, CategoryBlock), 
+    get_items=get_image_files, 
+    splitter=RandomSplitter(valid_pct=0.2, seed=42),
+    get_y=parent_label,
+    item_tfms=Resize(128),
 
-data = ImageDataBunch.from_folder(path, train='train', valid='test', 
-                                  ds_tfms=get_transforms(do_flip=False),no_check=True,
-                                  size=224, bs=2, num_workers=8)
+    )
+
+dls = data_.dataloaders(path,bs=batch_size)
+learn = vision_learner(dls, resnet101, metrics=error_rate)
+learn.fine_tune(epochs)
+learn.export('weights/view7.pkl')
 
 
-learn = cnn_learner(data, models.resnet50, metrics = [accuracy])
-
-
-learn.fit_one_cycle(100, 1e-3)
-
-learn.save("best.hd5")
 
 

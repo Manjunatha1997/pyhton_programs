@@ -6,13 +6,13 @@ import cv2
 import bson
 from matplotlib import image
 
-path = r'C:\Users\Manju\Downloads\indomim_anno\view_12Copy\good\\'
+path = r'D:\sansera_conrod_burr\burrCopy\\'
 
 print(path)
 # files = os.listdir(path)
 files = glob.glob(path+'*.xml')
 print(files)
-out_path = r'C:\Users\Manju\Downloads\indomim_anno\view_12Copy\good_out\\'
+out_path = r'D:\sansera_conrod_burr\burrCopy_out\\'
 
 if not os.path.isdir(out_path):
 	os.makedirs(out_path)
@@ -34,7 +34,7 @@ for file in files:
 		xmax = object.find('bndbox/xmax').text
 		ymax = object.find('bndbox/ymax').text
 
-		img = file.replace('.xml','.png')
+		img = file.replace('.xml','.jpg')
 		# image = tyuioplokjmuyhgtvfrcdxzsedcxswz
 		image = cv2.imread(img)
 		print(xmin,ymin,xmax,ymax)
@@ -42,6 +42,9 @@ for file in files:
 
 		crop_image = image[int(ymin):int(ymax),int(xmin):int(xmax)]
 		print(crop_image)
-		cv2.imwrite(f'{out_path}{str(bson.ObjectId())}.png',crop_image)
+		if not os.path.isdir(os.path.join(out_path,name)):
+			os.makedirs(os.path.join(out_path,name))
+		
+		cv2.imwrite(f'{os.path.join(out_path,name)}/{str(bson.ObjectId())}.jpg',crop_image)
 		
 		

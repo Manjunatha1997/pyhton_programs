@@ -26,7 +26,6 @@ import glob
 
 
 cwd = r'D:\python_programs\streamlit_UI'
-print(cwd)
 
 def create_csv():
 	today_date = date.today()
