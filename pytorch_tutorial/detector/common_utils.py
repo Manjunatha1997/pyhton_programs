@@ -94,6 +94,12 @@ class CacheHelper():
             return None
         return None
 
+    def flush_all(self):
+        self.redis_cache.flushdb()
+        return None
+        
+
+
     def execute_pipe_commands(self, commands):
         #TBD to increase efficiency can chain commands for getting cache in one go
         return None
